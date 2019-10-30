@@ -5,7 +5,7 @@ export default class Fave extends Component {
     super();
 
     this.state = {
-      isFave: false
+      // isFave: false
     };
   }
 
@@ -13,22 +13,24 @@ export default class Fave extends Component {
     var handleClick = e => {
       console.log("handling Fave click!");
       e.stopPropagation();
-      this.setState({
-        isFave: !this.state.isFave
-      });
-      console.log(this.state.isFave);
+      // this.setState({
+      //   isFave: !this.state.isFave
+      // });
+      // console.log(this.state.isFave);
+      this.props.onFaveToggle();
+      
     };
 
     return (
       <div
         className={
           "film-row-fave" +
-          (this.state.isFave ? " remove_from_queue" : " add_to_queue")
+          (this.props.isFave ? " remove_from_queue" : " add_to_queue")
         }
         onClick={handleClick}
       >
         <p className="material-icons">
-          {this.state.isFave ? " remove_from_queue" : " add_to_queue"}
+          {this.props.isFave ? " remove_from_queue" : " add_to_queue"}
         </p>
       </div>
     );
