@@ -17,7 +17,7 @@ export default class App extends Component {
 
   handleDetailsClick(film) {
     
-    const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=6a10830b86a9cd714ddd5f2f9df40485&append_to_response=videos,images&language=en`
+    const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
 
     axios({
       method: 'GET',
