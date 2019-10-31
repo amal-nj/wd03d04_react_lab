@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TMDB from "./TMDB";
 import FilmListing from "./FilmListing";
 import FilmDetails from "./FilmDetails";
-
+import axios from "axios";
 export default class App extends Component {
   constructor() {
     super();
@@ -16,10 +16,21 @@ export default class App extends Component {
   };
 
   handleDetailsClick(film) {
-    console.log("Fetching details for " + film);
-    this.setState({
-      current: film
-    });
+    
+    const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=6a10830b86a9cd714ddd5f2f9df40485&append_to_response=videos,images&language=en`
+
+    axios({
+      method: 'GET',
+      url: url
+    }).then(response => {
+      console.log(response) // take a look at what you get back!
+      console.log(`Fetching details for ${film.title}`);
+      this.setState({ current: response.data });
+      // console.log(this.state.current);
+
+    })
+    .catch(error=>console.log(error));
+  
   }
 
   handleFaveToggle(film) {
@@ -52,8 +63,8 @@ export default class App extends Component {
           />
         </div>
 
-        <div className="film-details" film={this.state.current}>
-          <FilmDetails />
+        <div className="film-details">
+          <FilmDetails  film={this.state.current}/>
         </div>
       </div>
     );

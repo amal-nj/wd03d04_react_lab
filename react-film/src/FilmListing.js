@@ -25,6 +25,7 @@ export default class FilmListing extends Component {
           <h1 className="section-title">FILMS</h1>
           {show.map(item => (
             <FilmRow
+              film={item}
               title={item.title}
               date={item.release_date.split("-")[0]}
               key={item.id}
